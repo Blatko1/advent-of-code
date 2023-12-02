@@ -5,13 +5,14 @@ fn main() {
     for line in input.lines() {
         let mut number_words = Vec::with_capacity(line.len());
         for (num, num_str) in NUMBERS.iter().enumerate() {
-            let matches: Vec<(usize, &str)> = line.match_indices(num_str).collect();
+            let matches: Vec<(usize, &str)> =
+                line.match_indices(num_str).collect();
             for (index, _) in matches {
                 number_words.push((num, index))
             }
         }
         number_words.sort_by(|(_, pos_a), (_, pos_b)| pos_a.cmp(pos_b));
-        
+
         if !number_words.is_empty() {
             let (first_number_word, first_number_word_pos) =
                 number_words.first().unwrap();
@@ -32,7 +33,7 @@ fn main() {
                 .unwrap();
             let last_number_digit_pos =
                 line.len() - 1 - last_number_digit_pos_rev;
-                
+
             let first = if *first_number_word_pos < first_number_digit_pos {
                 *first_number_word as u32
             } else {
