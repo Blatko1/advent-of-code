@@ -6,7 +6,7 @@ fn main() {
 }
 
 fn part1() {
-    let input = include_str!("../inputs/input03.txt");
+    let input = include_str!("../inputs/03.txt");
 
     let lines: Vec<&str> = input.lines().collect();
     let line_len = input.lines().next().unwrap().len();
@@ -61,7 +61,7 @@ fn part1() {
 }
 
 fn part2() {
-    let input = include_str!("../inputs/input03.txt");
+    let input = include_str!("../inputs/03.txt");
 
     let lines: Vec<&str> = input.lines().collect();
     let line_len = input.lines().next().unwrap().len();

@@ -4,7 +4,7 @@ fn main() {
 }
 
 fn part1() {
-    let input = include_str!("../inputs/input02.txt");
+    let input = include_str!("../inputs/02.txt");
     let max_red = 12;
     let max_green = 13;
     let max_blue = 14;
@@ -46,7 +46,7 @@ fn part1() {
 }
 
 fn part2() {
-    let input = include_str!("../inputs/input02.txt");
+    let input = include_str!("../inputs/02.txt");
 
     let mut sum = 0;
     for line in input.lines() {
