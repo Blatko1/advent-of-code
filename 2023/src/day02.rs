@@ -13,11 +13,11 @@ fn part1() {
     'games: for (i, line) in input.lines().enumerate() {
         let game_id = i + 1;
         let sets: Vec<_> =
-            line.split(":").nth(1).unwrap().trim().split("; ").collect();
+            line.split(':').nth(1).unwrap().trim().split("; ").collect();
         for set in sets {
             let cubes_colors: Vec<_> = set.split(", ").collect();
             for cubes in cubes_colors {
-                let split: Vec<_> = cubes.split(" ").collect();
+                let split: Vec<_> = cubes.split(' ').collect();
                 let number: u32 = split[0].parse().unwrap();
                 let color = split[1];
                 match color {
@@ -55,13 +55,13 @@ fn part2() {
         let mut max_blue = 0;
 
         let sets: Vec<_> =
-            line.split(":").nth(1).unwrap().trim().split("; ").collect();
+            line.split(':').nth(1).unwrap().trim().split("; ").collect();
 
         for set in sets {
             let cubes_colors: Vec<_> = set.split(", ").collect();
 
             for cubes in cubes_colors {
-                let split: Vec<_> = cubes.split(" ").collect();
+                let split: Vec<_> = cubes.split(' ').collect();
                 let number: u32 = split[0].parse().unwrap();
                 let color = split[1];
                 match color {
