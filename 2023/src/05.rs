@@ -63,8 +63,8 @@ fn part1() {
     println!("min location: {}", min);
 }
 
-/// This functions takes a very long time (2 - 3 min) to find the result. 
-fn part2() {
+/// This functions takes a very long time (2 - 3 min) to find the result.
+fn _part2() {
     let input = include_str!("../inputs/05.txt");
 
     // Parse the input seed ranges from the 'input'
