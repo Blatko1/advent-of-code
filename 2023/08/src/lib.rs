@@ -1,13 +1,6 @@
 use std::collections::HashMap;
 
-fn main() {
-    part1();
-    part2();
-}
-
-fn part1() {
-    let input = include_str!("../inputs/08.txt");
-
+pub fn part1(input: &str) -> u64 {
     let mut lines = input.lines();
     let directions = lines.next().unwrap().chars().map(Direction::from);
     lines.next();
@@ -44,12 +37,10 @@ fn part1() {
             paths = next;
         }
     }
-    println!("steps: {}", steps);
+    steps
 }
 
-fn part2() {
-    let input = include_str!("../inputs/08.txt");
-
+pub fn part2(input: &str) -> u64 {
     let mut lines = input.lines();
     let directions = lines.next().unwrap().chars().map(Direction::from);
     lines.next();
@@ -92,12 +83,12 @@ fn part2() {
             }
         }
     }
+    // Using the LCM method found from other people on Reddit
     let mut least_common_multiple = 1;
     for step in steps {
         least_common_multiple = lcm(least_common_multiple, step);
     }
-
-    println!("least common multiple: {:?}", least_common_multiple);
+    least_common_multiple
 }
 
 fn lcm(a: u64, b: u64) -> u64 {

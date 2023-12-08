@@ -1,29 +1,7 @@
 use std::cmp::Ordering;
 
-fn main() {
-    let input = include_str!("../inputs/07.txt");
-    let lines = input.lines().map(|l| {
-        let input: Vec<&str> = l.split_whitespace().collect();
-        (input[0], input[1].parse::<u32>().unwrap())
-    });
-
-    let mut hands = Vec::new();
-    lines.for_each(|(hand_str, bid)| {
-        let hand = Hand::from(hand_str);
-        hands.push((hand, bid))
-    });
-    hands.sort_by(|(a, _), (b, _)| a.partial_cmp(b).unwrap());
-
-    let mut sum = 0;
-    for (f, &(_, bid)) in hands.iter().enumerate() {
-        let factor = f as u32 + 1;
-        sum += bid * factor;
-    }
-    println!("sum: {}", sum);
-}
-
 #[derive(Debug, PartialEq, Eq)]
-struct Hand([Card; 5]);
+pub struct Hand([Card; 5]);
 
 impl Hand {
     fn get_type(&self) -> HandType {
@@ -109,7 +87,7 @@ impl PartialOrd for Hand {
 // The hand types are ordered from the smallest to the biggest
 // value as written here.
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
-enum HandType {
+pub enum HandType {
     HighCard,
     OnePair,
     TwoPair,
@@ -137,7 +115,7 @@ impl From<&str> for Hand {
 // The card types are ordered from the smallest to the biggest
 // value as written here.
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone, Copy)]
-enum Card {
+pub enum Card {
     Two,
     Three,
     Four,

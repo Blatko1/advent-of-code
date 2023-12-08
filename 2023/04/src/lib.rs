@@ -1,21 +1,14 @@
-fn main() {
-    part1();
-    part2();
-}
-
-fn part1() {
-    let input = include_str!("../inputs/04.txt");
-
+pub fn part1(input: &str) -> u64 {
     let mut sum = 0;
     for line in input.lines() {
         let content = line.split(':').last().unwrap().trim();
         let split: Vec<_> =
             content.split('|').map(|nums| nums.trim()).collect();
-        let winning_numbers: Vec<u32> = split[0]
+        let winning_numbers: Vec<u64> = split[0]
             .split_whitespace()
             .map(|num| num.parse().unwrap())
             .collect();
-        let mut available_numbers: Vec<u32> = split[1]
+        let mut available_numbers: Vec<u64> = split[1]
             .split_whitespace()
             .map(|num| num.parse().unwrap())
             .collect();
@@ -29,26 +22,25 @@ fn part1() {
         }
         match win_count.cmp(&1) {
             std::cmp::Ordering::Equal => sum += 1,
-            std::cmp::Ordering::Greater => sum += 2u32.pow(win_count - 1),
+            std::cmp::Ordering::Greater => sum += 2u64.pow(win_count - 1),
             _ => (),
         }
     }
-    println!("sum: {}", sum);
+    sum
 }
 
-fn part2() {
-    let input = include_str!("../inputs/04.txt");
+pub fn part2(input: &str) -> u64 {
     let mut instance_state = vec![1; input.lines().count()];
 
     for (card_i, line) in input.lines().enumerate() {
         let content = line.split(':').last().unwrap().trim();
         let split: Vec<_> =
             content.split('|').map(|nums| nums.trim()).collect();
-        let winning_numbers: Vec<u32> = split[0]
+        let winning_numbers: Vec<u64> = split[0]
             .split_whitespace()
             .map(|num| num.parse().unwrap())
             .collect();
-        let mut available_numbers: Vec<u32> = split[1]
+        let mut available_numbers: Vec<u64> = split[1]
             .split_whitespace()
             .map(|num| num.parse().unwrap())
             .collect();
@@ -64,6 +56,6 @@ fn part2() {
             instance_state[i] += instance_state[card_i];
         }
     }
-    let sum: u32 = instance_state.iter().sum();
-    println!("sum: {}", sum);
+    let sum: u64 = instance_state.iter().sum();
+    sum
 }

@@ -1,6 +1,18 @@
-fn main() {
-    let input = include_str!("../inputs/01.txt");
+pub fn part1(input: &str) -> u64 {
+    let mut sum = 0;
+    for line in input.lines() {
+        let first = line.chars().find(|c| c.is_ascii_digit()).unwrap();
+        let last = match line.chars().rev().find(|c| c.is_ascii_digit()) {
+            Some(c) => c,
+            None => first,
+        };
+        let num: u64 = format!("{first}{last}").parse().unwrap();
+        sum += num;
+    }
+    sum
+}
 
+pub fn part2(input: &str) -> u64 {
     let mut sum = 0;
     for line in input.lines() {
         let mut number_words = Vec::with_capacity(line.len());
@@ -45,7 +57,7 @@ fn main() {
             } else {
                 last_number_digit.to_digit(10).unwrap()
             };
-            let num: i32 = format!("{first}{last}").parse().unwrap();
+            let num: u64 = format!("{first}{last}").parse().unwrap();
             sum += num;
         } else {
             let first = line.chars().find(|c| c.is_ascii_digit()).unwrap();
@@ -53,11 +65,11 @@ fn main() {
                 Some(c) => c,
                 None => first,
             };
-            let num: i32 = format!("{first}{last}").parse().unwrap();
+            let num: u64 = format!("{first}{last}").parse().unwrap();
             sum += num;
         }
     }
-    println!("sum: {}", sum);
+    sum
 }
 
 const NUMBERS: &[&str] = &[

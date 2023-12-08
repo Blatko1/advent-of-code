@@ -1,10 +1,4 @@
-fn main() {
-    part1();
-    part2();
-}
-
-fn part1() {
-    let input = include_str!("../inputs/06.txt");
+pub fn part1(input: &str) -> u64 {
     let mut lines = input.lines();
 
     let times = lines
@@ -42,11 +36,10 @@ fn part1() {
         let win_count = last_win_time - first_win_time + 1;
         product *= win_count;
     });
-    println!("product: {}", product);
+    product
 }
 
-fn part2() {
-    let input = include_str!("../inputs/06.txt");
+pub fn part2(input: &str) -> u64 {
     let mut lines = input.lines();
 
     let race_time = lines
@@ -85,7 +78,5 @@ fn part2() {
 
     let last_win_time = race_time - first_win_time;
 
-    let win_count = last_win_time - first_win_time + 1;
-
-    println!("win_count: {}", win_count);
+    last_win_time - first_win_time + 1
 }

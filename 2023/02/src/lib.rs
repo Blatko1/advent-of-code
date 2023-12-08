@@ -1,24 +1,18 @@
-fn main() {
-    part1();
-    part2();
-}
-
-fn part1() {
-    let input = include_str!("../inputs/02.txt");
+pub fn part1(input: &str) -> u64 {
     let max_red = 12;
     let max_green = 13;
     let max_blue = 14;
 
     let mut sum = 0;
     'games: for (i, line) in input.lines().enumerate() {
-        let game_id = i + 1;
+        let game_id = i as u64 + 1;
         let sets: Vec<_> =
             line.split(':').nth(1).unwrap().trim().split("; ").collect();
         for set in sets {
             let cubes_colors: Vec<_> = set.split(", ").collect();
             for cubes in cubes_colors {
                 let split: Vec<_> = cubes.split(' ').collect();
-                let number: u32 = split[0].parse().unwrap();
+                let number: u64 = split[0].parse().unwrap();
                 let color = split[1];
                 match color {
                     "red" => {
@@ -42,12 +36,10 @@ fn part1() {
         }
         sum += game_id;
     }
-    println!("sum: {sum}");
+    sum
 }
 
-fn part2() {
-    let input = include_str!("../inputs/02.txt");
-
+pub fn part2(input: &str) -> u64 {
     let mut sum = 0;
     for line in input.lines() {
         let mut max_red = 0;
@@ -62,7 +54,7 @@ fn part2() {
 
             for cubes in cubes_colors {
                 let split: Vec<_> = cubes.split(' ').collect();
-                let number: u32 = split[0].parse().unwrap();
+                let number: u64 = split[0].parse().unwrap();
                 let color = split[1];
                 match color {
                     "red" => {
@@ -81,5 +73,5 @@ fn part2() {
         let power = max_red * max_blue * max_green;
         sum += power;
     }
-    println!("sum: {sum}");
+    sum
 }

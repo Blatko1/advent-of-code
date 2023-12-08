@@ -1,13 +1,6 @@
 use std::ops::RangeInclusive;
 
-fn main() {
-    part1();
-    part2();
-}
-
-fn part1() {
-    let input = include_str!("../inputs/03.txt");
-
+pub fn part1(input: &str) -> u64 {
     let lines: Vec<&str> = input.lines().collect();
     let line_len = input.lines().next().unwrap().len();
 
@@ -24,7 +17,7 @@ fn part1() {
                 .unwrap_or(line_len - start);
             let end_pos = start + rel_end_bound - 1;
             position = end_pos + 1;
-            let num: u32 = line[start..=end_pos].parse().unwrap();
+            let num: u64 = line[start..=end_pos].parse().unwrap();
 
             let bound_box_left = start.saturating_sub(1);
             let bound_box_right = (end_pos + 1).min(line_len - 1);
@@ -57,12 +50,10 @@ fn part1() {
             }
         }
     }
-    println!("sum: {}", sum);
+    sum
 }
 
-fn part2() {
-    let input = include_str!("../inputs/03.txt");
-
+pub fn part2(input: &str) -> u64 {
     let lines: Vec<&str> = input.lines().collect();
     let line_len = input.lines().next().unwrap().len();
 
@@ -80,7 +71,7 @@ fn part2() {
                 .unwrap_or(line_len - start);
             let end_pos = start + rel_end_bound - 1;
             position = end_pos + 1;
-            let num: u32 = line[start..=end_pos].parse().unwrap();
+            let num: u64 = line[start..=end_pos].parse().unwrap();
 
             let abs_start = line_index + start;
             let abs_end = line_index + end_pos;
@@ -147,11 +138,10 @@ fn part2() {
             }
         }
     }
-
-    println!("sum: {}", sum);
+    sum
 }
 
 struct PartNumber {
-    value: u32,
+    value: u64,
     indices: RangeInclusive<usize>,
 }

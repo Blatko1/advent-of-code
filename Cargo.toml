@@ -1,5 +1,13 @@
 [workspace]
 members = [
-    "20*"
+    "2023/*"
 ]
 resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+
+[workspace.dependencies]
+criterion = "0.5.1"
+regex = "1.10"
