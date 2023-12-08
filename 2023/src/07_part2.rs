@@ -26,7 +26,7 @@ fn main() {
 struct Hand([Card; 5]);
 
 impl Hand {
-    // The better solution from: 
+    // The better solution from:
     // https://github.com/tlent/advent-of-code/blob/main/year_2023/day_07/src/lib.rs
     fn get_type(&self) -> HandType {
         let mut card_counts = [0; 14];

@@ -27,7 +27,7 @@ struct Hand([Card; 5]);
 
 impl Hand {
     fn get_type(&self) -> HandType {
-        let mut hand = self.0.clone();
+        let mut hand = self.0;
         hand.sort();
         let elem2 = hand[1];
         let elem4 = hand[3];
@@ -40,20 +40,15 @@ impl Hand {
 
         // Check for a Four of a kind
         // Possibilities: AAAAx, xAAAA
-        if hand[0..=3].iter().all(|&elem| elem == elem2) {
-            return HandType::FourOfKind;
-        } else if hand[1..=4].iter().all(|&elem| elem == elem2) {
+        if hand[0..=3].iter().all(|&elem| elem == elem2) ||hand[1..=4].iter().all(|&elem| elem == elem2) {
             return HandType::FourOfKind;
         }
 
         // Check for a Full house
         // Possibilities: AAABB, AABBB
-        if hand[0..=2].iter().all(|&elem| elem == elem2)
-            && hand[3..=4].iter().all(|&elem| elem == elem4)
-        {
-            return HandType::FullHouse;
-        } else if hand[0..=1].iter().all(|&elem| elem == elem2)
-            && hand[2..=4].iter().all(|&elem| elem == elem4)
+        if (hand[0..=2].iter().all(|&elem| elem == elem2)
+            && hand[3..=4].iter().all(|&elem| elem == elem4)) || (hand[0..=1].iter().all(|&elem| elem == elem2)
+            && hand[2..=4].iter().all(|&elem| elem == elem4))
         {
             return HandType::FullHouse;
         }
@@ -69,17 +64,11 @@ impl Hand {
 
         // Check for a Two pair
         // Possibilities: AABBx, AAxBB, xAABB
-        if hand[0..=1].iter().all(|&elem| elem == elem2) {
-            if hand[2..=3].iter().all(|&elem| elem == elem4)
-                || hand[3..=4].iter().all(|&elem| elem == elem4)
+        if (hand[0..=1].iter().all(|&elem| elem == elem2) && (hand[2..=3].iter().all(|&elem| elem == elem4)
+                || hand[3..=4].iter().all(|&elem| elem == elem4))) || (hand[1..=2].iter().all(|&elem| elem == elem2) && hand[3..=4].iter().all(|&elem| elem == elem4))
             {
                 return HandType::TwoPair;
             }
-        } else if hand[1..=2].iter().all(|&elem| elem == elem2) {
-            if hand[3..=4].iter().all(|&elem| elem == elem4) {
-                return HandType::TwoPair;
-            }
-        }
 
         // Check for a One pair
         // Possibilities: AAxyz, xAAyz, xyAAz, xyzAA
@@ -91,7 +80,7 @@ impl Hand {
             return HandType::OnePair;
         }
 
-        return HandType::HighCard;
+        HandType::HighCard
     }
 }
 
