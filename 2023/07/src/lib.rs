@@ -22,7 +22,7 @@ pub fn part1(input: &str) -> u64 {
 }
 
 use crate::hands::hand2::Hand as Hand2;
-pub fn part2(input: &str) -> u64{
+pub fn part2(input: &str) -> u64 {
     let lines = input.lines().map(|l| {
         let input: Vec<&str> = l.split_whitespace().collect();
         (input[0], input[1].parse::<u64>().unwrap())

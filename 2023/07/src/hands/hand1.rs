@@ -18,15 +18,18 @@ impl Hand {
 
         // Check for a Four of a kind
         // Possibilities: AAAAx, xAAAA
-        if hand[0..=3].iter().all(|&elem| elem == elem2) ||hand[1..=4].iter().all(|&elem| elem == elem2) {
+        if hand[0..=3].iter().all(|&elem| elem == elem2)
+            || hand[1..=4].iter().all(|&elem| elem == elem2)
+        {
             return HandType::FourOfKind;
         }
 
         // Check for a Full house
         // Possibilities: AAABB, AABBB
         if (hand[0..=2].iter().all(|&elem| elem == elem2)
-            && hand[3..=4].iter().all(|&elem| elem == elem4)) || (hand[0..=1].iter().all(|&elem| elem == elem2)
-            && hand[2..=4].iter().all(|&elem| elem == elem4))
+            && hand[3..=4].iter().all(|&elem| elem == elem4))
+            || (hand[0..=1].iter().all(|&elem| elem == elem2)
+                && hand[2..=4].iter().all(|&elem| elem == elem4))
         {
             return HandType::FullHouse;
         }
@@ -42,11 +45,14 @@ impl Hand {
 
         // Check for a Two pair
         // Possibilities: AABBx, AAxBB, xAABB
-        if (hand[0..=1].iter().all(|&elem| elem == elem2) && (hand[2..=3].iter().all(|&elem| elem == elem4)
-                || hand[3..=4].iter().all(|&elem| elem == elem4))) || (hand[1..=2].iter().all(|&elem| elem == elem2) && hand[3..=4].iter().all(|&elem| elem == elem4))
-            {
-                return HandType::TwoPair;
-            }
+        if (hand[0..=1].iter().all(|&elem| elem == elem2)
+            && (hand[2..=3].iter().all(|&elem| elem == elem4)
+                || hand[3..=4].iter().all(|&elem| elem == elem4)))
+            || (hand[1..=2].iter().all(|&elem| elem == elem2)
+                && hand[3..=4].iter().all(|&elem| elem == elem4))
+        {
+            return HandType::TwoPair;
+        }
 
         // Check for a One pair
         // Possibilities: AAxyz, xAAyz, xyAAz, xyzAA

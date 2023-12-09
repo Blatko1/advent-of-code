@@ -1,4 +1,4 @@
-pub fn part1(input: &str) ->u64 {
+pub fn part1(input: &str) -> u64 {
     // Parse the input seeds from the 'input'
     let input_seeds: Vec<u64> = input
         .lines()
