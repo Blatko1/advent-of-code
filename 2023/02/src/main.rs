@@ -1,5 +1,5 @@
-use aoc_2023_02::part1;
-use aoc_2023_02::part2;
+use aoc2023_02::part1;
+use aoc2023_02::part2;
 
 fn main() {
     let input = include_str!("../input.txt");

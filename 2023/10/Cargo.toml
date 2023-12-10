@@ -1,5 +1,5 @@
 [package]
-name = "aoc2023_06"
+name = "aoc2023_10"
 version.workspace = true
 edition.workspace = true
 
