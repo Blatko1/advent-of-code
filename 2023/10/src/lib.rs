@@ -22,7 +22,7 @@ const PIPE_POLES: &[&[(char, Direction)]] = &[
     CONNECTING_FROM_BOTTOM,
     CONNECTING_FROM_LEFT,
     CONNECTING_FROM_TOP,
-    CONNECTING_FROM_RIGHT
+    CONNECTING_FROM_RIGHT,
 ];
 
 pub fn part1(input: &str) -> u64 {
@@ -64,7 +64,7 @@ pub fn part1(input: &str) -> u64 {
         }
     }
 
-    // Check the next facing direction and get the pipe at 
+    // Check the next facing direction and get the pipe at
     // that position and it's leading direction
     let mut steps = 2;
     let mut next_pipe;
@@ -130,7 +130,7 @@ pub fn part1(input: &str) -> u64 {
 
 pub fn part2(input: &str) -> u64 {
     let mut map: Vec<Vec<char>> =
-    input.lines().map(|l| l.chars().collect()).collect();
+        input.lines().map(|l| l.chars().collect()).collect();
     let line_len = map.first().unwrap().len();
     let mut only_loop_map = vec![vec!['.'; line_len]; map.len()];
 
@@ -159,8 +159,7 @@ pub fn part2(input: &str) -> u64 {
     // and so on...
     for (&(adj, dir), pipes) in adjacent.iter().zip(PIPE_POLES) {
         let current_pipe = &mut map[adj.1][adj.0];
-        if pipes.iter().any(|&(pipe, _)| *current_pipe == pipe)
-        {
+        if pipes.iter().any(|&(pipe, _)| *current_pipe == pipe) {
             adjacent_pipes[i] = dir;
             i += 1;
         }
@@ -168,7 +167,6 @@ pub fn part2(input: &str) -> u64 {
     let start_tile_pipe = find_start_tile(adjacent_pipes[0], adjacent_pipes[1]);
     only_loop_map[y][x] = start_tile_pipe;
     //println!("adjacents: {:?}, start_tile: {}", adjacent_pipes, start_tile_pipe);
-
 
     map[y][x] = '0';
     // The order of elements adjacent to the starting tile: top, right, bottom, left
@@ -199,7 +197,7 @@ pub fn part2(input: &str) -> u64 {
         }
     }
 
-    // Check the next facing direction and get the pipe at 
+    // Check the next facing direction and get the pipe at
     // that position and it's leading direction
     let mut next_pipe;
     loop {
@@ -291,7 +289,7 @@ pub fn part2(input: &str) -> u64 {
             if tile == '0' {
                 continue;
             }
-            let hit_count = side_hit_count(&loop_row[(x+1)..]);
+            let hit_count = side_hit_count(&loop_row[(x + 1)..]);
             //println!("tile: {}, hits: {}", tile, hit_count);
             if hit_count % 2 != 0 {
                 enclosed_tiles += 1;
@@ -317,22 +315,31 @@ fn side_hit_count(tiles: &[char]) -> u64 {
     for &tile in tiles {
         if BENDING_PIPES.contains(&tile) {
             match (last_bending_pipe, tile) {
-                ('L', 'J') => {hits -= 1; continue},
-                ('F', '7') => {hits -= 1; continue},
-                ('L', '7') => {continue},
-                ('F', 'J') => {continue},
-                _ => ()
+                ('L', 'J') => {
+                    hits -= 1;
+                    continue;
+                }
+                ('F', '7') => {
+                    hits -= 1;
+                    continue;
+                }
+                ('L', '7') => continue,
+                ('F', 'J') => continue,
+                _ => (),
             }
-            hits+=1;
+            hits += 1;
             last_bending_pipe = tile;
         } else if tile == '|' {
-            hits +=1;
+            hits += 1;
         }
     }
     hits
 }
 
-fn find_start_tile(first_adjacent: Direction, last_adjacent: Direction) -> char {
+fn find_start_tile(
+    first_adjacent: Direction,
+    last_adjacent: Direction,
+) -> char {
     match (first_adjacent, last_adjacent) {
         (Direction::Up, Direction::Left) => 'L',
         (Direction::Up, Direction::Down) => '|',
@@ -340,7 +347,7 @@ fn find_start_tile(first_adjacent: Direction, last_adjacent: Direction) -> char 
         (Direction::Right, Direction::Down) => 'F',
         (Direction::Right, Direction::Left) => '-',
         (Direction::Down, Direction::Left) => '7',
-        _ => unreachable!()
+        _ => unreachable!(),
     }
 }
 
@@ -354,6 +361,9 @@ enum Direction {
 
 #[test]
 fn side_count_hit_test() {
-    let input = &['L', '7', '0', '0', '0', 'L', 'J', 'F', '7', 'F', '-', '7', 'L', '7', '0'];
+    let input = &[
+        'L', '7', '0', '0', '0', 'L', 'J', 'F', '7', 'F', '-', '7', 'L', '7',
+        '0',
+    ];
     assert_eq!(side_hit_count(input), 2);
 }
