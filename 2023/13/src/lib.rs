@@ -3,16 +3,16 @@ pub fn part1(input: &str) -> u64 {
 
     let mut sum = 0;
     for section in sections {
-        // For the vertical reflected lines
-        if let Some(vertical) = find_reflection_lines(&section) {
-            sum += vertical;
+        if let Some(horizontal) = find_reflection_lines(&section) {
+            sum += 100 * horizontal;
             continue;
         }
+
         let rotated_owned = rotate_sections(&section);
         let rotated: Vec<&str> = rotated_owned.iter().map(|str| str.as_str()).collect();
-
-        if let Some(horizontal) = find_reflection_lines(&rotated) {
-            sum += 100 * horizontal;
+        // For the vertical reflected lines
+        if let Some(vertical) = find_reflection_lines(&rotated) {
+            sum += vertical;
             continue;
         }
         unreachable!()
