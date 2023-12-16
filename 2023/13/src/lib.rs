@@ -20,7 +20,7 @@ pub fn part1(input: &str) -> u64 {
     sum as u64
 }
 
-pub fn part2(input: &str) -> u64 {
+pub fn part2(_input: &str) -> u64 {
     todo!();
 }
 
@@ -94,7 +94,7 @@ fn parse_input(input: &str) -> Vec<Vec<&str>> {
     sections
 }
 
-fn rotate_sections<'a>(sections: &[&str]) -> Vec<String> {
+fn rotate_sections(sections: &[&str]) -> Vec<String> {
     let height = sections.len();
     let line_len = sections.first().unwrap().len();
     let mut rotated_sections: Vec<String> = vec![String::with_capacity(sections.len()); line_len];
