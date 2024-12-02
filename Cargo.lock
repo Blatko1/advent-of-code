@@ -115,6 +115,7 @@ dependencies = [
 ]
 
 [[package]]
+<<<<<<< HEAD
 name = "aoc2024_01"
 version = "0.1.0"
 dependencies = [
@@ -123,6 +124,9 @@ dependencies = [
 
 [[package]]
 name = "aoc2024_02"
+=======
+name = "aoc2023_15"
+>>>>>>> f2d2de9877b0f1a8b5ab0e886aeef6b48d2cab58
 version = "0.1.0"
 dependencies = [
  "criterion",

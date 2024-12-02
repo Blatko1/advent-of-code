@@ -33,6 +33,6 @@ pub fn part1(input: &str) -> u64 {
     sum as u64
 }
 
-pub fn part2(input: &str) -> u64 {
+pub fn part2(_input: &str) -> u64 {
     todo!();
 }
