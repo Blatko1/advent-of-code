@@ -11,4 +11,4 @@ edition = "2021"
 
 [workspace.dependencies]
 criterion = "0.5.1"
-regex = "1.10"
+regex = "1.11.1"

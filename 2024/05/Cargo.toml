@@ -1,0 +1,10 @@
+[package]
+name = "aoc2024_05"
+version.workspace = true
+edition.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+
+[dependencies]
+regex = "1.11.1"
