@@ -33,13 +33,17 @@ fn part1(input: &str) -> u32 {
 
 fn part2(input: &str) -> u32 {
     // Stitching a do() at the beginning
-    let input = &format!("do(){}",input);
+    let input = &format!("do(){}", input);
     let find_active = Regex::new(r"do\(\)([\s\S]+?)don't\(\)").unwrap();
     let find_mul = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
 
     let mut sum = 0;
-    for (_, [active_segment]) in find_active.captures_iter(input).map(|c| c.extract()) {
-        for (_, [num1, num2]) in find_mul.captures_iter(active_segment).map(|c| c.extract()) {
+    for (_, [active_segment]) in
+        find_active.captures_iter(input).map(|c| c.extract())
+    {
+        for (_, [num1, num2]) in
+            find_mul.captures_iter(active_segment).map(|c| c.extract())
+        {
             let num1: u32 = num1.parse().unwrap();
             let num2: u32 = num2.parse().unwrap();
             sum += num1 * num2;

@@ -66,10 +66,10 @@ fn part1_for_loop(input: &str) -> u32 {
     safe_reports
 }
 
-fn part2(input: &str) -> u32 {
+fn _part2(input: &str) -> u32 {
     let mut safe_reports = 0;
     for line in input.lines() {
-        let mut levels: Vec<i32> = line
+        let levels: Vec<i32> = line
             .split_whitespace()
             .map(|l| l.parse::<i32>().unwrap())
             .collect();
@@ -79,7 +79,7 @@ fn part2(input: &str) -> u32 {
             Ok(_) => safe_reports += 1,
             Err(level_idx) => {
                 let mut level_idx = level_idx;
-                for a in 0..(3).min(level_count - level_idx) {
+                for _a in 0..(3).min(level_count - level_idx) {
                     //println!("{}", a);
                     let mut levels = levels.clone();
                     //println!("removed: {}", levels.get(level_idx).unwrap());
