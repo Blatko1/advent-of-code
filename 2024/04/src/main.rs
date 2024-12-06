@@ -116,64 +116,72 @@ fn part2(input: &str) -> u32 {
     for (y, line) in lines.iter().enumerate() {
         for (x, _) in line.chars().enumerate().filter(|(_, c)| *c == 'A') {
             // Case where above 'A' are 'M' and 'M'
-            let check_adjacent_diagonal = |ne: &str, se: &str, sw: &str, nw: &str| -> bool {
-                // North-East
-                let Some(y_pos) = y.checked_sub(1) else {
-                    return false;
-                };
-                let Some(ne_char) = lines[y_pos].get((x+1)..(x+2)) else {
-                    return false;
-                };
-                if ne_char != ne {
-                    return false;
-                }
+            let check_adjacent_diagonal =
+                |ne: &str, se: &str, sw: &str, nw: &str| -> bool {
+                    // North-East
+                    let Some(y_pos) = y.checked_sub(1) else {
+                        return false;
+                    };
+                    let Some(ne_char) = lines[y_pos].get((x + 1)..(x + 2))
+                    else {
+                        return false;
+                    };
+                    if ne_char != ne {
+                        return false;
+                    }
 
-                // South-East
-                let Some(y_line) = lines.get(y+1) else {
-                    return false;
-                };
-                let Some(se_char) = y_line.get((x+1)..(x+2)) else {
-                    return false;
-                };
-                if se_char != se {
-                    return false;
-                }
+                    // South-East
+                    let Some(y_line) = lines.get(y + 1) else {
+                        return false;
+                    };
+                    let Some(se_char) = y_line.get((x + 1)..(x + 2)) else {
+                        return false;
+                    };
+                    if se_char != se {
+                        return false;
+                    }
 
-                // South-West
-                let Some(y_line) = lines.get(y+1) else {
-                    return false;
+                    // South-West
+                    let Some(y_line) = lines.get(y + 1) else {
+                        return false;
+                    };
+                    let Some(x_pos) = x.checked_sub(1) else {
+                        return false;
+                    };
+
+                    let Some(sw_char) = y_line.get(x_pos..(x_pos + 1)) else {
+                        return false;
+                    };
+                    if sw_char != sw {
+                        return false;
+                    }
+
+                    // North-West
+                    let Some(y_pos) = y.checked_sub(1) else {
+                        return false;
+                    };
+                    let Some(x_pos) = x.checked_sub(1) else {
+                        return false;
+                    };
+
+                    let Some(nw_char) = lines[y_pos].get(x_pos..(x_pos + 1))
+                    else {
+                        return false;
+                    };
+                    if nw_char != nw {
+                        return false;
+                    }
+
+                    true
                 };
-                let Some(x_pos) = x.checked_sub(1) else { return false; };
 
-                let Some(sw_char) = y_line.get(x_pos..(x_pos+1)) else {
-                    return false;
-                };
-                if sw_char != sw {
-                    return false;
-                }
-
-                // North-West
-                let Some(y_pos) = y.checked_sub(1) else {
-                    return false;
-                };
-                let Some(x_pos) = x.checked_sub(1) else { return false; };
-
-                let Some(nw_char) = lines[y_pos].get(x_pos..(x_pos+1)) else {
-                    return false;
-                };
-                if nw_char != nw {
-                    return false;
-                }
-
-                true
-            };
-
-            if check_adjacent_diagonal("M", "S", "S", "M") || 
-                check_adjacent_diagonal("M", "M", "S", "S") ||
-                check_adjacent_diagonal("S", "M", "M", "S") ||
-                check_adjacent_diagonal("S", "S", "M", "M") {
-                    xmas_count += 1;
-                }
+            if check_adjacent_diagonal("M", "S", "S", "M")
+                || check_adjacent_diagonal("M", "M", "S", "S")
+                || check_adjacent_diagonal("S", "M", "M", "S")
+                || check_adjacent_diagonal("S", "S", "M", "M")
+            {
+                xmas_count += 1;
+            }
         }
     }
     xmas_count
