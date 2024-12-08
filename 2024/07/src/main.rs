@@ -9,7 +9,12 @@ fn part1(input: &str) -> i64 {
     for line in input.lines() {
         let mut left_right = line.split(':');
         let result: i64 = left_right.next().unwrap().parse().unwrap();
-        let mut values: Vec<i64> = left_right.next().unwrap().split_whitespace().map(|v| v.parse().unwrap()).collect();
+        let mut values: Vec<i64> = left_right
+            .next()
+            .unwrap()
+            .split_whitespace()
+            .map(|v| v.parse().unwrap())
+            .collect();
         values.reverse();
 
         if recursive_valid_check(result, &values) {
@@ -42,14 +47,19 @@ fn recursive_valid_check(result: i64, values_rev: &[i64]) -> bool {
     }
 
     false
-}   
+}
 
 fn part2(input: &str) -> i64 {
     let mut sum = 0;
     for line in input.lines() {
         let mut left_right = line.split(':');
         let result: i64 = left_right.next().unwrap().parse().unwrap();
-        let mut values: Vec<i64> = left_right.next().unwrap().split_whitespace().map(|v| v.parse().unwrap()).collect();
+        let mut values: Vec<i64> = left_right
+            .next()
+            .unwrap()
+            .split_whitespace()
+            .map(|v| v.parse().unwrap())
+            .collect();
         values.reverse();
 
         if recursive_valid_check_part2(result, &values) {
@@ -97,7 +107,7 @@ fn recursive_valid_check_part2(result: i64, values_rev: &[i64]) -> bool {
     }
 
     false
-}  
+}
 
 #[test]
 fn test_2024_07() {

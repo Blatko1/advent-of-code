@@ -113,8 +113,8 @@ fn part2(input: &str) -> u32 {
         map[obstruction_y][obstruction_x] = OBSTRUCTION;
 
         //modified.replace_range((obstruction_y*12 + obstruction_x)..(obstruction_y*12 + obstruction_x+1), "O");
-        //std::fs::write("2024/06/input_test.txt", &modified).unwrap();            
-        
+        //std::fs::write("2024/06/input_test.txt", &modified).unwrap();
+
         let (mut x, mut y) = (start_x, start_y);
         let mut direction = start_direction;
         let mut encountered_obstacles = HashSet::new();
@@ -125,7 +125,9 @@ fn part2(input: &str) -> u32 {
             if let Some(row) = map.get_mut(new_y_pos) {
                 if let Some(next_field) = row.get_mut(new_x_pos) {
                     if ['#', OBSTRUCTION].contains(next_field) {
-                        if !encountered_obstacles.insert(((new_x_pos, new_y_pos), direction)) {
+                        if !encountered_obstacles
+                            .insert(((new_x_pos, new_y_pos), direction))
+                        {
                             //println!("DID!!!!");
                             loops += 1;
                             break;
@@ -147,7 +149,7 @@ fn part2(input: &str) -> u32 {
         }
 
         //modified = original.clone();
-        //std::fs::write("2024/06/input_test.txt", &modified).unwrap();  
+        //std::fs::write("2024/06/input_test.txt", &modified).unwrap();
         map[obstruction_y][obstruction_x] = EMPTY;
     }
 
