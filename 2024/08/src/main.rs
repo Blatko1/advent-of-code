@@ -21,8 +21,8 @@ fn part1(input: &str) -> usize {
 
     for (_, positions) in antena_map.iter() {
         let count = positions.len();
-        for (i, (x1, y1)) in positions[0..count-1].iter().enumerate() {
-            for (x2, y2) in &positions[(i+1)..count] {
+        for (i, (x1, y1)) in positions[0..count - 1].iter().enumerate() {
+            for (x2, y2) in &positions[(i + 1)..count] {
                 let offset = (x2 - x1, y2 - y1);
                 // First antinode
                 // Not checking for negatives since casting wraps around bounds
@@ -45,12 +45,14 @@ fn part1(input: &str) -> usize {
             }
         }
     }
-    let out: String = map.iter().map(|row| 
-        {let mut row_str: String = row.iter().collect(); 
-            row_str.push('\n'); 
+    let out: String = map
+        .iter()
+        .map(|row| {
+            let mut row_str: String = row.iter().collect();
+            row_str.push('\n');
             row_str
-        }
-    ).collect();
+        })
+        .collect();
     std::fs::write("2024/08/test.txt", &out).unwrap();
 
     out.chars().filter(|&c| c == '#').count()
@@ -71,9 +73,9 @@ fn part2(input: &str) -> usize {
 
     for (_, positions) in antena_map.iter() {
         let count = positions.len();
-        for (i, (x1, y1)) in positions[0..count-1].iter().enumerate() {
+        for (i, (x1, y1)) in positions[0..count - 1].iter().enumerate() {
             map[*y1 as usize][*x1 as usize] = '#';
-            for (x2, y2) in &positions[(i+1)..count] {
+            for (x2, y2) in &positions[(i + 1)..count] {
                 map[*y2 as usize][*x2 as usize] = '#';
 
                 let offset = (x2 - x1, y2 - y1);
@@ -111,14 +113,15 @@ fn part2(input: &str) -> usize {
             }
         }
     }
-    let out: String = map.iter().map(|row| 
-        {let mut row_str: String = row.iter().collect(); 
-            row_str.push('\n'); 
+    let out: String = map
+        .iter()
+        .map(|row| {
+            let mut row_str: String = row.iter().collect();
+            row_str.push('\n');
             row_str
-        }
-    ).collect();
+        })
+        .collect();
     std::fs::write("2024/08/test2.txt", &out).unwrap();
 
     out.chars().filter(|&c| c == '#').count()
 }
-
