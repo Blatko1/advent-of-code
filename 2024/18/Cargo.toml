@@ -1,0 +1,7 @@
+[package]
+name = "aoc2024_18"
+version.workspace = true
+edition.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true

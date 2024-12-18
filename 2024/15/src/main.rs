@@ -208,16 +208,25 @@ fn part2(input: &str) -> usize {
             '^' => {
                 let old_map = map.clone();
                 let mut start_pos = start_pos;
-                if move_up_recursive(start_pos.0, start_pos.1, &mut map, &old_map) {
+                if move_up_recursive(
+                    start_pos.0,
+                    start_pos.1,
+                    &mut map,
+                    &old_map,
+                ) {
                     map[start_pos.1][start_pos.0] = '.';
                     start_pos.1 -= 1;
-                    if map[start_pos.1-1][start_pos.0] == '[' {
-                        if !(map[start_pos.1][start_pos.0+1] == '[' && map[start_pos.1][start_pos.0+2] == ']') {
-                            map[start_pos.1][start_pos.0+1] = '.';
+                    if map[start_pos.1 - 1][start_pos.0] == '[' {
+                        if !(map[start_pos.1][start_pos.0 + 1] == '['
+                            && map[start_pos.1][start_pos.0 + 2] == ']')
+                        {
+                            map[start_pos.1][start_pos.0 + 1] = '.';
                         }
-                    } else if map[start_pos.1-1][start_pos.0] == ']' {
-                        if !(map[start_pos.1][start_pos.0-2] == '[' && map[start_pos.1][start_pos.0-1] == ']') {
-                            map[start_pos.1][start_pos.0-1] = '.';
+                    } else if map[start_pos.1 - 1][start_pos.0] == ']' {
+                        if !(map[start_pos.1][start_pos.0 - 2] == '['
+                            && map[start_pos.1][start_pos.0 - 1] == ']')
+                        {
+                            map[start_pos.1][start_pos.0 - 1] = '.';
                         }
                     }
                 } else {
@@ -229,16 +238,25 @@ fn part2(input: &str) -> usize {
             'v' => {
                 let old_map = map.clone();
                 let mut start_pos = start_pos;
-                if move_down_recursive(start_pos.0, start_pos.1, &mut map, &old_map) {
+                if move_down_recursive(
+                    start_pos.0,
+                    start_pos.1,
+                    &mut map,
+                    &old_map,
+                ) {
                     map[start_pos.1][start_pos.0] = '.';
                     start_pos.1 += 1;
-                    if map[start_pos.1+1][start_pos.0] == '[' {
-                        if !(map[start_pos.1][start_pos.0+1] == '[' && map[start_pos.1][start_pos.0+2] == ']') {
-                            map[start_pos.1][start_pos.0+1] = '.';
+                    if map[start_pos.1 + 1][start_pos.0] == '[' {
+                        if !(map[start_pos.1][start_pos.0 + 1] == '['
+                            && map[start_pos.1][start_pos.0 + 2] == ']')
+                        {
+                            map[start_pos.1][start_pos.0 + 1] = '.';
                         }
-                    } else if map[start_pos.1+1][start_pos.0] == ']' {
-                        if !(map[start_pos.1][start_pos.0-2] == '[' && map[start_pos.1][start_pos.0-1] == ']') {
-                            map[start_pos.1][start_pos.0-1] = '.';
+                    } else if map[start_pos.1 + 1][start_pos.0] == ']' {
+                        if !(map[start_pos.1][start_pos.0 - 2] == '['
+                            && map[start_pos.1][start_pos.0 - 1] == ']')
+                        {
+                            map[start_pos.1][start_pos.0 - 1] = '.';
                         }
                     }
                 } else {
@@ -328,9 +346,14 @@ fn move_bot_right_part2(
     (start_x, start_y)
 }
 
-fn move_up_recursive(x: usize, y: usize, map: &mut [Vec<char>], old_map: &Vec<Vec<char>>) -> bool {
-    if old_map[y+1][x] != '#' {
-        map[y][x] = old_map[y+1][x];
+fn move_up_recursive(
+    x: usize,
+    y: usize,
+    map: &mut [Vec<char>],
+    old_map: &Vec<Vec<char>>,
+) -> bool {
+    if old_map[y + 1][x] != '#' {
+        map[y][x] = old_map[y + 1][x];
     }
     if y - 1 > 0 {
         return match old_map[y - 1][x] {
@@ -338,9 +361,9 @@ fn move_up_recursive(x: usize, y: usize, map: &mut [Vec<char>], old_map: &Vec<Ve
             '[' => {
                 // Avoids doubling the recursion.
                 // Only the ']' part will manage recursion if two boxes are directly one above other
-                if old_map[y][x] == old_map[y-1][x] {
+                if old_map[y][x] == old_map[y - 1][x] {
                     return true;
-                } 
+                }
                 let result = move_up_recursive(x, y - 1, map, old_map)
                     && move_up_recursive(x + 1, y - 1, map, old_map);
                 map[y - 1][x] = old_map[y][x];
@@ -354,21 +377,30 @@ fn move_up_recursive(x: usize, y: usize, map: &mut [Vec<char>], old_map: &Vec<Ve
             }
             '.' => {
                 map[y - 1][x] = old_map[y][x];
-                true},
+                true
+            }
             _ => unreachable!(),
         };
     }
     false
 }
 
-fn move_down_recursive(x: usize, y: usize, map: &mut [Vec<char>], old_map: &Vec<Vec<char>>) -> bool {
-    if old_map[y-1][x] != '#' {
-        map[y][x] = old_map[y-1][x];
+fn move_down_recursive(
+    x: usize,
+    y: usize,
+    map: &mut [Vec<char>],
+    old_map: &Vec<Vec<char>>,
+) -> bool {
+    if old_map[y - 1][x] != '#' {
+        map[y][x] = old_map[y - 1][x];
     }
     let bottom_row = map.len() - 1;
     if y + 1 < bottom_row {
         return match old_map[y + 1][x] {
-            '#' => {println!("for: {}/{}", x,y );false},
+            '#' => {
+                println!("for: {}/{}", x, y);
+                false
+            }
             '[' => {
                 let result = move_down_recursive(x, y + 1, map, old_map)
                     && move_down_recursive(x + 1, y + 1, map, old_map);
@@ -383,10 +415,11 @@ fn move_down_recursive(x: usize, y: usize, map: &mut [Vec<char>], old_map: &Vec<
             }
             '.' => {
                 map[y + 1][x] = old_map[y][x];
-                true},
+                true
+            }
             _ => unreachable!(),
         };
     }
-    println!("for: {}/{}", x,y );
+    println!("for: {}/{}", x, y);
     false
 }
